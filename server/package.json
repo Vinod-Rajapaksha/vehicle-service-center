@@ -4,6 +4,7 @@
   "description": "Node js Backend for Vehicle Service Center Management System",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "jest",
     "test:unit": "jest tests/unit --runInBand",
     "test:integration": "jest tests/integration --runInBand",
