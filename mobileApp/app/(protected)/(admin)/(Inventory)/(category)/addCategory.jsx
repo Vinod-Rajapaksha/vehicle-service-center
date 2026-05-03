@@ -30,22 +30,28 @@ export default function AddCategory({ visible, onClose, onSuccess }) {
 
   return (
     <Modal visible={visible} transparent animationType="fade">
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
-        <Formik initialValues={{ name: "" }} validationSchema={CategorySchema} onSubmit={handleAdd}>
-          {(formikProps) => (
-            <View style={styles.modalOverlay}>
-              <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={onClose} />
+      <View style={styles.modalOverlay}>
+        <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={onClose} />
+        
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <Formik initialValues={{ name: "" }} validationSchema={CategorySchema} onSubmit={handleAdd}>
+            {(formikProps) => (
               <View style={styles.modalSheet}>
                 <View style={styles.modalHeader}>
                   <Text style={styles.modalHeading}>Add Category</Text>
-                  <TouchableOpacity onPress={onClose}><Ionicons name="close" size={24} color={colors.DARK} /></TouchableOpacity>
+                  <TouchableOpacity onPress={onClose}>
+                    <Ionicons name="close" size={24} color={colors.DARK} />
+                  </TouchableOpacity>
                 </View>
                 <CategoryForm {...formikProps} loading={loading} onCancel={onClose} />
               </View>
-            </View>
-          )}
-        </Formik>
-      </KeyboardAvoidingView>
+            )}
+          </Formik>
+        </KeyboardAvoidingView>
+      </View>
+      <Toast />
     </Modal>
   );
 }

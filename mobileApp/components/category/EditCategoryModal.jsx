@@ -88,17 +88,20 @@ export default function EditCategoryModal({ visible, category, onClose, onSucces
 
   return (
     <Modal visible={visible} transparent animationType="fade">
-      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
-        <Formik
-          key={category.id}
-          initialValues={{ name: category.name || "" }}
-          validationSchema={CategorySchema}
-          onSubmit={handleUpdate}
-          enableReinitialize
+      <View style={styles.modalOverlay}>
+        <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={onClose} />
+        
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          {(formikProps) => (
-            <View style={styles.modalOverlay}>
-              <TouchableOpacity style={StyleSheet.absoluteFillObject} onPress={onClose} />
+          <Formik
+            key={category.id}
+            initialValues={{ name: category.name || "" }}
+            validationSchema={CategorySchema}
+            onSubmit={handleUpdate}
+            enableReinitialize
+          >
+            {(formikProps) => (
               <View style={styles.modalSheet}>
                 <View style={styles.modalHeader}>
                   <Text style={styles.modalHeading}>Edit Category</Text>
@@ -115,10 +118,11 @@ export default function EditCategoryModal({ visible, category, onClose, onSucces
                   onView={handleView}
                 />
               </View>
-            </View>
-          )}
-        </Formik>
-      </KeyboardAvoidingView>
+            )}
+          </Formik>
+        </KeyboardAvoidingView>
+      </View>
+      <Toast />
     </Modal>
   );
 }

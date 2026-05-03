@@ -88,6 +88,7 @@ export default function ItemSelectionScreen() {
         <TextInput
           style={styles.searchInput}
           placeholder="Search items..."
+          placeholderTextColor={colors.SECONDARY}
           value={search}
           onChangeText={setSearch}
         />
